@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Atlas Name Game</string>
+    <string name="rule1">1. This game tests your knowledge about names of countries across the globe.</string>
+    <string name="rule2">2. The system starts the game by throwing a random country name.</string>
+
+    <string name="rul3"> 3. You have to type in another country that begins with the last letter of the
+                            country name thrown by the system.</string>
+    <string name="rule4"> 4. You get points for giving the correct country name. If you give a wrong name
+                            (other than countries or a country that does not begin with the last letter of the
+                            system given name),points are deducted.</string>
+    <string name="rule5"> 5. You should not repeat any country name. However,even if you do so, you will
+                             not be penalized but neither will the score increase. The system will throw
+                             another random name and the game continues.</string>
+    <string name="rule6"> 6. If you choose to play in timebound mode, be quick to answer or the timer will
+                             run out, which will mark the end of the game. There is no timer in simple mode.  </string>
+</resources>

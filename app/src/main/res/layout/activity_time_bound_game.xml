@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".TimeBoundGameActivity"
+    android:background="@drawable/map">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/systemname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:textStyle="bold|italic"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:id="@+id/timerView"
+            android:layout_below="@+id/systemname"
+            android:background="@drawable/round_textview"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCORE :"
+                android:id="@+id/textView5"
+                android:textStyle="bold|italic"
+                android:layout_alignTop="@+id/score"
+                android:layout_alignLeft="@+id/timerView"
+                android:layout_alignStart="@+id/timerView"
+                android:layout_weight="0.2"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/score"
+                android:layout_centerVertical="true"
+                android:layout_alignRight="@+id/timerView"
+                android:layout_alignEnd="@+id/timerView"
+                android:textStyle="bold"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/edittext"
+                android:layout_alignTop="@+id/button"
+                android:layout_toLeftOf="@+id/button"
+                android:layout_toStartOf="@+id/button"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"
+                android:inputType="textVisiblePassword"
+                android:hint="Type the country name here"
+                android:gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:id="@+id/button"
+                android:text="Submit"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/timerView"
+                android:layout_toEndOf="@+id/timerView"
+                android:background="@color/selected"
+                android:textColor="@android:color/primary_text_light"
+                android:layout_weight="0.2" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>
