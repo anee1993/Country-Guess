@@ -7,31 +7,51 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="countryguess.com.countryguess.GameActivity"
-    android:background="@drawable/map">
+    android:background="@color/pure_white"
+    tools:context="countryguess.com.countryguess.GameActivity">
 
-    <ImageView
-        android:layout_width="150dp"
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/globe_gif"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/globe"/>
+
+    <TextView
+        android:layout_width="@dimen/text_width"
         android:layout_height="wrap_content"
         android:id="@+id/new_game"
-        android:src="@drawable/newgame"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="@string/new_game"
+        android:background="@color/colorNewGame"
+        android:gravity="center"
+        android:textSize="@dimen/main_text_size"
         android:layout_above="@+id/game_rules"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+    <TextView
         android:id="@+id/game_rules"
-        android:src="@drawable/rules"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/quit_game"
-        android:layout_alignStart="@+id/quit_game" />
-
-    <ImageView
-        android:layout_width="100dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="@string/rules"
+        android:textSize="@dimen/main_text_size" />
+
+    <TextView
         android:id="@+id/quit_game"
-        android:src="@drawable/exitgame"
+        android:layout_width="@dimen/text_width"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/game_rules"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="18dp"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="@string/exit"
+        android:textSize="@dimen/main_text_size" />
 </RelativeLayout>

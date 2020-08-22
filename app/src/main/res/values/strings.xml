@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Atlas Name Game</string>
+    <string name="new_game">New Game</string>
+    <string name="country_name">Country Name</string>
+    <string name="rules">Rules</string>
+    <string name="exit">Exit</string>
     <string name="rule1">1. This game tests your knowledge about names of countries across the globe.</string>
     <string name="rule2">2. The system starts the game by throwing a random country name.</string>
 
@@ -13,4 +17,9 @@
                              another random name and the game continues.</string>
     <string name="rule6"> 6. If you choose to play in timebound mode, be quick to answer or the timer will
                              run out, which will mark the end of the game. There is no timer in simple mode.  </string>
+    <string name="type_the_country_name_here">Type your Country name here!</string>
+    <string name="score">SCORE :</string>
+    <string name="your_high_score">Congratulations, your high score is</string>
+    <string name="submit">Submit</string>
+    <string name="highscore">highscore</string>
 </resources>

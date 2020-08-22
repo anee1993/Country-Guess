@@ -8,48 +8,37 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="countryguess.com.countryguess.GameOverActivity"
-    android:background="@drawable/map">
+    android:background="@color/pure_white">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/globe_gif"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/globe"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/gameover"
-        android:layout_marginTop="54dp"
         android:src="@drawable/gameover"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
         android:layout_alignParentEnd="true" />
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/gotomenu"
-            android:src="@drawable/gotomenu"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:id="@+id/score_details"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="100dp">
+        android:layout_below="@id/gameover">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="SCORE:"
+            android:text="@string/your_high_score"
             android:id="@+id/score_info"
             android:textStyle="bold|italic"
             android:layout_weight="0.1" />
@@ -61,8 +50,19 @@
             android:id="@+id/score_val"
             android:textStyle="bold|italic"
             android:textSize="25sp"
-            android:text="highscore"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_gravity="center"
+            android:hint="@string/highscore"
             android:layout_weight="1" />
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gotomenu"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/score_details"
+        android:src="@drawable/gotomenu" />
 
 </RelativeLayout>

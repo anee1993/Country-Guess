@@ -9,11 +9,12 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
 
-    ImageView newgame,gamerules,quitgame;
+    TextView newgame,gamerules,quitgame;
 
     @Override
     public void onBackPressed() {
@@ -24,9 +25,9 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        newgame = (ImageView)findViewById(R.id.new_game);
-        gamerules = (ImageView)findViewById(R.id.game_rules);
-        quitgame = (ImageView)findViewById(R.id.quit_game);
+        newgame = (TextView)findViewById(R.id.new_game);
+        gamerules = (TextView)findViewById(R.id.game_rules);
+        quitgame = (TextView)findViewById(R.id.quit_game);
         newgame.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
