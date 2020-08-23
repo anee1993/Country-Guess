@@ -1,11 +1,12 @@
 package countryguess.com.countryguess;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,19 +25,17 @@ import java.util.Random;
 
 public class SimpleGameActivity extends AppCompatActivity {
 
-    String formula_value;
-    private ArrayList<String> formList;
-    JSONArray m_jArry;
-    EditText edit;
-    TextView text,time,ai_name;
-    Button button;
-    private Random randomGen;
-    boolean bool=false;
-    CountDownTimer start;
-    TextView scorecount;
+    String countryName;
+    ArrayList<String> countryList;
+    JSONArray countryAndCodeArray;
+    EditText type_a_country;
+    TextView country_name;
+    Button submit;
+    TextView scoreValue;
+    TextView time;
+    CountDownTimer countDown;
     static int count = 0;
-    int cc = 0;
-    int index;
+    boolean isTimeBoundGame = false;
     ArrayList<String> displayedList = new ArrayList<>();
 
     @Override
@@ -49,9 +48,12 @@ public class SimpleGameActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        Intent intentToGame = new Intent(SimpleGameActivity.this,GameOverActivity.class);
-                        intentToGame.putExtra("Score",count);
-                        count=0;
+                        Intent intentToGame = new Intent(SimpleGameActivity.this, GameOverActivity.class);
+                        intentToGame.putExtra("Score", count);
+                        count = 0;
+                        if(null != countDown){
+                            countDown.cancel();
+                        }
                         startActivity(intentToGame);
                     }
                 });
@@ -72,27 +74,31 @@ public class SimpleGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_game);
-        edit = (EditText)findViewById(R.id.edittext);
-        text = (TextView)findViewById(R.id.systemname);
-        ai_name = (TextView)findViewById(R.id.systemname);
-        button = (Button)findViewById(R.id.button);
-        time = (TextView)findViewById(R.id.timerView);
-        scorecount=(TextView)findViewById(R.id.score);
+        type_a_country = (EditText) findViewById(R.id.entry_country_name);
+        country_name = (TextView) findViewById(R.id.country_name);
+        submit = (Button) findViewById(R.id.submit_answer);
+        scoreValue = (TextView) findViewById(R.id.score);
+        Bundle extras = getIntent().getExtras();
+        if (null != extras) {
+            isTimeBoundGame = extras.getBoolean("timeBound");
+            if (isTimeBoundGame) {
+                time = (TextView) findViewById(R.id.time);
+                assert time != null;
+                time.setVisibility(View.VISIBLE);
+                countDown = countDown();
+            }
+        }
 
         try {
             JSONObject obj = new JSONObject(loadJSONFromAsset());
-            m_jArry = obj.getJSONArray("Countries");
-            formList = new ArrayList<String>();
-            //HashMap<String, String> m_li;
+            countryAndCodeArray = obj.getJSONArray("Countries");
+            countryList = new ArrayList<>();
 
-            for (int i = 0; i < m_jArry.length(); i++) {
-                JSONObject jo_inside = m_jArry.getJSONObject(i);
+            for (int i = 0; i < countryAndCodeArray.length(); i++) {
+                JSONObject jo_inside = countryAndCodeArray.getJSONObject(i);
                 Log.d("Details-->", jo_inside.getString("name"));
-                formula_value = jo_inside.getString("name");
-               /* m_li = new HashMap<String, String>();
-                m_li.put("formule", formula_value);*/
-                // m_li.put("url", url_value);
-                formList.add(formula_value);
+                countryName = jo_inside.getString("name");
+                countryList.add(countryName);
             }
 
         } catch (JSONException e) {
@@ -101,25 +107,25 @@ public class SimpleGameActivity extends AppCompatActivity {
 
         randomName();
 
-        button.setOnClickListener(new View.OnClickListener() {
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 putname();
-                edit.setText("");
+                type_a_country.setText("");
             }
         });
     }
 
 
     public String loadJSONFromAsset() {
-        String json = null;
+        String json;
         try {
             InputStream is = getAssets().open("CountriesJson.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            json = new String(buffer, "UTF-8");
+            json = new String(buffer);
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
@@ -127,58 +133,36 @@ public class SimpleGameActivity extends AppCompatActivity {
         return json;
     }
 
-    public String randomName(){
-        String randomStr = null;
-        randomGen = new Random();
-        if(formList.size()>0) {
-            int index = randomGen.nextInt(formList.size());
-            randomStr = formList.get(index);
-            if(!displayedList.isEmpty()) {
-                Log.d("Came","RandomName");
-                if (!displayedList.contains(randomStr)) {
-                    text.setText(randomStr);
-                    displayedList.add(randomStr);
+    public void randomName() {
+        String randomStr;
+        Random randomStringGenerator = new Random();
+        if (countryList.size() > 0) {
+            int index = randomStringGenerator.nextInt(countryList.size());
+            randomStr = countryList.get(index);
+            Log.d("Came", "RandomName");
+            if (!displayedList.contains(randomStr)) {
+                country_name.setText(randomStr);
+                if (null != countDown) {
+                    countDown.start();
                 }
-            }
-            else{
-                text.setText(randomStr);
                 displayedList.add(randomStr);
+            } else {
+                randomName();
             }
-            Log.d("Came",randomStr);
+            Log.d("Came", randomStr);
         }
-        return randomStr;
     }
 
-    public String getname(){
-        String randomString = null;
-
-        for(int i=0;i<formList.size();i++) {
-            randomString = formList.get(i);
-
-            if(!displayedList.isEmpty()) {
-                if (!displayedList.contains(randomString)) {
-                    text.setText(randomString);
-                    displayedList.add(randomString);
-                    return randomString;
-                }
-            }
-            Log.d("Came",randomString);
-        }
-
-        return randomString;
-
-    }
-
+    @SuppressLint("SetTextI18n")
     public void putname() {
 
-        String name = edit.getText().toString();
-        if(name.equals("")){
+        String name = type_a_country.getText().toString();
+        if (name.equals("")) {
             Toast.makeText(SimpleGameActivity.this, "Please enter a proper country name", Toast.LENGTH_SHORT).show();
-        }
-        else if(!name.equals("")) {
+        } else {
             char beginchar = name.charAt(0);
             char userchar = Character.toLowerCase(beginchar);
-            String sysname = ai_name.getText().toString();
+            String sysname = country_name.getText().toString();
             int position = sysname.trim().length() - 1;
             char syschar = sysname.charAt(position);
             char systemchar = Character.toLowerCase(syschar);
@@ -186,39 +170,43 @@ public class SimpleGameActivity extends AppCompatActivity {
                 Toast.makeText(SimpleGameActivity.this, "Country should start with Letter " + syschar, Toast.LENGTH_SHORT).show();
                 if (count != 0) {
                     count -= 5;
-                    scorecount.setText("" + count);
+                    scoreValue.setText("" + count);
                 }
             }
         }
 
-        if(displayedList.contains(name)){
-            Toast.makeText(this,"You have already used this country name",Toast.LENGTH_SHORT).show();
-        }
-
-        else {
-            for (int j = 0; j < m_jArry.length(); j++) {
-                if (name.trim().equalsIgnoreCase(formList.get(j))) {
-                    Toast.makeText(getApplicationContext(), "Correct Answer", Toast.LENGTH_SHORT).show();
-                    if(!displayedList.contains(name)) {
-                        displayedList.add(name.trim());
-                    }
-                    count += 5;
-                    scorecount.setText("" + count);
-
-                    String input = getName(name);
-                    text.setText(input);
-                    break;
-
+        if (displayedList.contains(name)) {
+            Toast.makeText(this, "You have already used this country name", Toast.LENGTH_SHORT).show();
+        } else {
+            if (countryList.contains(name.trim())) {
+                Toast.makeText(getApplicationContext(), "Correct Answer", Toast.LENGTH_SHORT).show();
+                if (!displayedList.contains(name)) {
+                    displayedList.add(name.trim());
+                }
+                count += 5;
+                scoreValue.setText("" + count);
+                if (null != countDown) {
+                    countDown.cancel();
+                }
+                String input = getName(name);
+                country_name.setText(input);
+                if (null != countDown) {
+                    countDown.start();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "No such country exists", Toast.LENGTH_SHORT).show();
+                if (count != 0) {
+                    count -= 5;
+                }
+                scoreValue.setText("" + count);
+                if (null != countDown) {
+                    countDown.cancel();
+                }
+                randomName();
+                if (null != countDown) {
+                    countDown.start();
                 }
             }
-        }
-        if (!formList.contains(name.trim())&&!name.trim().equals("")&&!displayedList.contains(name)) {
-            Toast.makeText(getApplicationContext(), "No such country exists", Toast.LENGTH_SHORT).show();
-            if (count != 0) {
-                count -= 5;
-            }
-            scorecount.setText("" + count);
-            getname();
         }
     }
 
@@ -226,26 +214,42 @@ public class SimpleGameActivity extends AppCompatActivity {
         String input = null;
         int position = name.trim().length() - 1;
         char startCharacter = name.charAt(position);
-        for (int i = 0; i < formList.size(); i++) {
-            input = formList.get(i);
+        for (int i = 0; i < countryList.size(); i++) {
+            input = countryList.get(i);
             if (!input.equals(name.trim())) {
                 char inputstart = input.charAt(0);
                 char lowercaseinputstart = Character.toLowerCase(inputstart);
                 if (lowercaseinputstart == startCharacter) {
                     if (!displayedList.contains(input)) {
                         Log.d("lastletter", input);
-                        // cc = 1;
-                        //text.setText(input);
                         displayedList.add(input);
-                        //countDown();
                         return input;
                     }
                 }
-
             }
         }
-
-
         return input;
+    }
+
+    public CountDownTimer countDown() {
+        return new CountDownTimer(30000, 1000) {
+
+            @SuppressLint("SetTextI18n")
+            public void onTick(long millisUntilFinished) {
+                time.setText("");
+                time.setText("" + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                Intent intent = new Intent(SimpleGameActivity.this, GameOverActivity.class);
+                intent.putExtra("Score", count);
+                count = 0;
+                if(null != countDown){
+                    countDown.cancel();
+                }
+                startActivity(intent);
+            }
+
+        };
     }
 }

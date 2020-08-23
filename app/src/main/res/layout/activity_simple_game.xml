@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".TimeBoundGameActivity"
     android:background="@color/pure_white">
 
-        <TextView
-            android:layout_width="@dimen/text_width"
-            android:layout_height="@dimen/text_height"
-            android:id="@+id/systemname"
-            android:gravity="center"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:hint="@string/country_name"
-            android:background="@color/colorNewGame"
-            android:layout_marginTop="70dp"
-            android:textStyle="bold|italic" />
+    <TextView
+        android:layout_width="@dimen/text_width"
+        android:layout_height="@dimen/text_height"
+        android:id="@+id/country_name"
+        android:gravity="center"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:hint="@string/country_name"
+        android:background="@color/colorNewGame"
+        android:layout_marginTop="70dp"
+        android:textStyle="bold|italic" />
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="150dp"
@@ -28,61 +24,71 @@
         android:src="@drawable/globe_gif"
         android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/globe"/>
+        android:id="@+id/globe" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_below="@id/country_name"
+        android:layout_marginTop="100dp">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout"
-            android:layout_below="@id/systemname"
-            android:layout_marginTop="100dp">
+            android:text="@string/score"
+            android:id="@+id/score"
+            android:textStyle="bold|italic"
+            android:layout_weight="1"
+            android:gravity="center_horizontal" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/score"
-                android:id="@+id/textView5"
-                android:textStyle="bold|italic"
-                android:layout_weight="0.2"
-                android:gravity="center_horizontal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/score"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linearLayout"
-            android:layout_marginTop="100dp">
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/score_value"
+            android:layout_weight="1" />
 
-            <EditText
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:id="@+id/edittext"
-                android:background="@android:color/transparent"
-                android:layout_weight="1"
-                android:inputType="textVisiblePassword"
-                android:imeOptions="flagNoFullscreen"
-                android:hint="@string/type_the_country_name_here"
-                android:gravity="center_horizontal"
-                android:autofillHints="" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/time"
+            android:hint="@string/time_left"
+            android:visibility="invisible"
+            android:layout_weight="1" />
 
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:id="@+id/button"
-                android:text="@string/submit"
-                android:gravity="center"
-                android:background="@color/selected"
-                android:textColor="@android:color/primary_text_light"
-                android:layout_weight="0.2" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout"
+        android:layout_marginTop="100dp">
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:id="@+id/entry_country_name"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:inputType="textVisiblePassword"
+            android:imeOptions="flagNoFullscreen"
+            android:hint="@string/type_the_country_name_here"
+            android:gravity="center_horizontal"
+            android:autofillHints="" />
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:id="@+id/submit_answer"
+            android:text="@string/submit"
+            android:gravity="center"
+            android:background="@color/selected"
+            android:textColor="@android:color/primary_text_light"
+            android:layout_weight="0.2" />
+
+    </LinearLayout>
 </RelativeLayout>

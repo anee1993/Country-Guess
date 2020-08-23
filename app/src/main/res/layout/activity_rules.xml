@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    android:orientation="vertical"
-    android:background="@drawable/map">
+    android:background="@color/pure_white">
 
     <TextView
         android:layout_width="wrap_content"
@@ -99,6 +99,13 @@
             android:id="@+id/rule6"
             android:layout_marginTop="20dp"
             android:textStyle="bold" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="@dimen/text_width"
+            android:layout_height="@dimen/text_width"
+            android:src="@drawable/globe_gif"
+            android:layout_gravity="center"
+            android:id="@+id/globe" />
 
     </LinearLayout>
     </ScrollView>

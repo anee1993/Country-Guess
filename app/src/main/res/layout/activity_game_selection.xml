@@ -8,10 +8,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="countryguess.com.countryguess.GameSelectionActivity"
-    android:background="@drawable/map">
+    android:background="@color/pure_white">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/text_width"
+        android:layout_height="@dimen/text_width"
+        android:src="@drawable/globe_gif"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/globe" />
 
     <ImageView
-        android:layout_width="200dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="wrap_content"
         android:id="@+id/simple_game"
         android:src="@drawable/simplegame"
@@ -19,7 +26,7 @@
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="200dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="wrap_content"
         android:id="@+id/time_bound"
         android:layout_centerVertical="true"

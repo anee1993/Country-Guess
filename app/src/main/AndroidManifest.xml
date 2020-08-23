@@ -17,9 +17,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".GameActivity" />
-        <activity android:name=".Test" />
-        <activity android:name=".TimeBoundGameActivity"
-            />
         <activity android:name=".GameSelectionActivity" />
         <activity android:name=".GameOverActivity" />
         <activity android:name=".RulesActivity" />
